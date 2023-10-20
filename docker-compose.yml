@@ -7,6 +7,7 @@ networks:
 services:
   nodemailer_contact_server:
     container_name: nodemailer_contact_server
+    restart: unless-stopped
     build: .
     ports:
       - "5000:5000"
