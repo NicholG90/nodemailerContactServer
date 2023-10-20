@@ -1,0 +1,30 @@
+name: Deploy to Remote Server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Connect to Tailscale
+        uses: tailscale/github-action@v2
+        with:
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+          tags: tag:ci
+      - name: Deploy to Server
+        run: |
+          ssh -o "StrictHostKeyChecking no" root@${{ secrets.VPS_NAME }} "
+          ls
+          cd nodemailerContactServer/scripts
+          ls
+          bash deploy.sh
+          "
+

@@ -1,0 +1,14 @@
+version: '3.8'
+
+networks:
+  hosting_network:
+    external: true
+
+services:
+  nodemailer_contact_server:
+    container_name: nodemailer_contact_server
+    build: .
+    ports:
+      - "5000:5000"
+    networks:
+      - hosting_network
