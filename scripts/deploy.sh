@@ -11,7 +11,7 @@ cd ..
 git pull
 
 # Start the application through docker
-docker compose up -d
+docker compose up -d --build
 
 echo "🚀 Application deployed!"
 
